@@ -1,14 +1,12 @@
 public abstract class ServiceProvider extends Cell
 {
     protected int radius;
-    protected int coordinateX;
-    protected int coordinateY;
+
 
     public ServiceProvider(int radius, int coordinateX, int coordinateY)
     {
         this.radius = radius;
-        this.coordinateX = coordinateX;
-        this.coordinateY = coordinateY;
+        super(coordinateX, coordinateY);
     }
 
     public void provideService(Cell grid)
@@ -16,9 +14,10 @@ public abstract class ServiceProvider extends Cell
         System.out.println("WIP");
     }
 
-    //Uses Manhattan Distance
+    // Uses Manhattan Distance
     public void distributeService(Cell[][] gridMap)
     {
+        // Algorithm for iterating through cells in radius top left to bottom right taking the position of service provider as origin
         for (int x = -radius; x < radius + 1 ; x++)
         {
             for (int y = -radius; y < radius + 1 ; y++)
