@@ -8,30 +8,43 @@ public class Housing extends Zone {
 
     @Override
     public void updateLevel() {
+
         if (this.receivedElectricity == 0 || this.receivedInternet == 0 || this.receivedWater == 0) {
             this.level = 0;
             return;
         }
+        // shutdown to 0
+
         if (this.level == 0 & this.receivedElectricity > 0 & this.receivedInternet > 0 & this.receivedWater > 0) {
             this.level = 1;
             return;
         }
+        // 0 to 1
+
         if (this.level == 1 & this.hasSecurity & this.hasEducation & this.hasHealth) {
             this.level = 2;
             return;
         }
+        // 1 to 2
+
         if ((this.level == 2) & (!this.hasHealth || !this.hasSecurity || !this.hasEducation)) {
             this.level = 1;
             return;
         }
-            else if (this.level == 2 & this.receivedLifestyle > 0) {
+        // 2 to 1
+
+        if (this.level == 2 & this.receivedLifestyle > 0) {
             this.level = 3;
             return;
-            }
+        }
+        // 2 to 3
+
         if (this.level == 3 & this.receivedLifestyle == 0) {
             this.level = 2;
             return;
         }
+        // 3 to 2
+
     }
 
     @Override
@@ -46,12 +59,15 @@ public class Housing extends Zone {
         if (this.level == 1) {
             return m; //
         }
-        else if (this.level == 2) {
+
+            else if (this.level == 2) {
             return 2 * m; //
         }
-        else if (this.level == 3) {
+
+            else if (this.level == 3) {
             return (2 * m) + this.receivedLifestyle; //
         }
+
         return 0;
     }
 }
