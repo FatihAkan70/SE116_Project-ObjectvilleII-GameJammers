@@ -1,3 +1,7 @@
+package objectville.cells.providers.services;
+
+import objectville.grid.Cell;
+
 public abstract class ServiceProvider extends Cell
 {
     protected int radius;

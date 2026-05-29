@@ -1,3 +1,5 @@
+package objectville.cells.providers.utilities;
+
 public class InternetHub extends UtilityProvider
 {
     public InternetHub(int startingInternet ,int coordinateX, int coordinateY)

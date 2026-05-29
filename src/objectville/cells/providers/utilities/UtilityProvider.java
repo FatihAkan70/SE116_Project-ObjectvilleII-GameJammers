@@ -1,3 +1,8 @@
+package objectville.cells.providers.utilities;
+
+import objectville.cells.zones.Zone;
+import objectville.grid.Cell;
+
 import java.util.ArrayList;
 
 public abstract class UtilityProvider extends Cell

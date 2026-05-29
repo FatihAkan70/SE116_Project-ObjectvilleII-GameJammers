@@ -1,3 +1,5 @@
+package objectville.grid;
+
 public abstract class Cell
 {
     protected int coordinateX;
