@@ -11,8 +11,8 @@ public abstract class UtilityProvider extends Cell
 
     public UtilityProvider(int utility ,int coordinateX, int coordinateY)
     {
-        this.utility = utility;
         super(coordinateX, coordinateY);
+        this.utility = utility;
     }
 
     public void generateUtility() {utility = utility + 100;}

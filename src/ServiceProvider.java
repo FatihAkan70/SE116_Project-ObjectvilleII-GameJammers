@@ -5,8 +5,8 @@ public abstract class ServiceProvider extends Cell
 
     public ServiceProvider(int radius, int coordinateX, int coordinateY)
     {
-        this.radius = radius;
         super(coordinateX, coordinateY);
+        this.radius = radius;
     }
 
     public void provideService(Cell grid)
