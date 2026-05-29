@@ -1,7 +1,7 @@
 package objectville.cells.zones;
 import objectville.grid.Cell;
 
-public class Zone extends Cell
+public abstract class Zone extends Cell
 {
     protected int level;    // level
 
@@ -14,11 +14,19 @@ public class Zone extends Cell
     protected boolean hasEducation;
 
     protected int receivedPopulation;       //Population
+    protected int receivedGoods;
+    protected int receivedLifestyle;
 
     public Zone(int coordinateX, int coordinateY)
     {
         super(coordinateX,coordinateY);
     }
 
+    public abstract void updateLevel();
+    public abstract int calculateOutput();
+
+    public void setReceivedLifestyle(int amount) {
+        this.receivedLifestyle = amount;
+    }
 
 }
