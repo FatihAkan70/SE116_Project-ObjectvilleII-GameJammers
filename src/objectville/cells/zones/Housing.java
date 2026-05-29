@@ -41,7 +41,6 @@ public class Housing extends Zone {
 
         if (this.level == 3 & this.receivedLifestyle == 0) {
             this.level = 2;
-            return;
         }
         // 3 to 2
 

@@ -47,7 +47,6 @@ public class Industrial extends Zone{
 
         if (this.level == 3 &  this.receivedPopulation <= this.calculateOutput()) {
             this.level = 2;
-            return;
         }
         // 3 to 2
 
@@ -60,7 +59,7 @@ public class Industrial extends Zone{
             return 0;
         }
 
-        int m = Math.min(this.receivedElectricity, this.receivedWater);;
+        int m = Math.min(this.receivedElectricity, this.receivedWater);
 
         if (this.level == 1) {
             return m;
