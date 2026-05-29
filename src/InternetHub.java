@@ -5,3 +5,5 @@ public class InternetHub extends UtilityProvider
         super(startingInternet, coordinateX, coordinateY);
     }
 }
+
+// çalışmaya başlamadan önce commit denemesi
