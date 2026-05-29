@@ -1,3 +1,5 @@
+package objectville.cells.providers.services;
+
 public class PoliceStation extends ServiceProvider
 {
     public PoliceStation(int coordinateX, int coordinateY)

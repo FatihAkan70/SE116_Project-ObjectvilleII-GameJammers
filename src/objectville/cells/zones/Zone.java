@@ -1,3 +1,6 @@
+package objectville.cells.zones;
+import objectville.grid.Cell;
+
 public class Zone extends Cell
 {
     protected int level;    // level
