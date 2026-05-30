@@ -39,13 +39,13 @@ public class Industrial extends Zone{
         }
         // 2 to 1
 
-        if (this.level == 2 & this.receivedPopulation > this.calculateOutput() ) {
+        if (this.level == 2 & this.receivedPopulation > this.computeOutput() ) {
             this.level = 3;
             return;
         }
         // 2 to 3
 
-        if (this.level == 3 &  this.receivedPopulation <= this.calculateOutput()) {
+        if (this.level == 3 &  this.receivedPopulation <= this.computeOutput()) {
             this.level = 2;
         }
         // 3 to 2
@@ -53,7 +53,7 @@ public class Industrial extends Zone{
     }
 
     @Override
-    public int calculateOutput() {
+    public int computeOutput() {
 
         if (this.level == 0) {
             return 0;

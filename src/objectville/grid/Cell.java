@@ -2,9 +2,10 @@ package objectville.grid;
 
 public abstract class Cell
 {
+
     protected int coordinateX;
-    public int getCoordinateX() {return coordinateX;}
     protected int coordinateY;
+    public int getCoordinateX() {return coordinateX;}
     public int getCoordinateY() {return coordinateY;}
 
     public Cell(int coordinateX, int coordinateY)
@@ -12,4 +13,9 @@ public abstract class Cell
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;
     }
+
+    public boolean isConnectable() {
+        return false;
+    }
+
 }

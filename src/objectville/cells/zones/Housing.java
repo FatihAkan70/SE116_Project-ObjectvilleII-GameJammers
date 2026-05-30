@@ -47,7 +47,7 @@ public class Housing extends Zone {
     }
 
     @Override
-    public int calculateOutput() {
+    public int computeOutput() {
 
         if (this.level == 0) {
             return 0;
