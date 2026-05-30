@@ -7,10 +7,8 @@ import java.util.ArrayList;
 
 import objectville.grid.Cell;  //Cell[][]
 
-import objectville.cells.infrastructure.Road; //for using later
-import objectville.cells.zones.Housing;
-import objectville.cells.zones.Industrial;
-import objectville.cells.zones.Commercial;
+import objectville.cells.infrastructure.* ; //for using later
+import objectville.cells.zones.* ;
 
 public class MapLoader {
 
