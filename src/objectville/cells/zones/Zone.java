@@ -86,4 +86,8 @@ public abstract class Zone extends Cell
     public void setReceivedLifestyle(int amount){
         this.receivedLifestyle = amount;
     }
+
+    public void setOutput(int value) {
+        output = value;
+    }
 }

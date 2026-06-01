@@ -1,5 +1,6 @@
 package objectville.cells.providers.utilities;
 
+import objectville.cells.infrastructure.Road;
 import objectville.cells.zones.Zone;
 import objectville.grid.Cell;
 
