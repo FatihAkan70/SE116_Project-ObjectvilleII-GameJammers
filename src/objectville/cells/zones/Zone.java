@@ -11,20 +11,39 @@ public abstract class Zone extends Cell
         return true;
     }
 
-    // Utility
+    //Utility
     protected int receivedElectricity;
     protected int receivedWater;
     protected int receivedInternet;
+
+    protected boolean needsElectricity;
+    protected boolean needsWater;
+    protected boolean needsInternet;
+
 
     //Service
     protected boolean hasSecurity;
     protected boolean hasEducation;
     protected boolean hasHealth;
 
-    //Population
+    protected boolean needsSecurity;
+    protected boolean needsEducation;
+    protected boolean needsHealth;
+
+
+    //Zone Outputs
     protected int receivedPopulation;
     protected int receivedGoods;
     protected int receivedLifestyle;
+
+    protected boolean needsPopulation;
+    protected boolean needsGoods;
+    protected boolean needsLifestyle;
+
+    protected boolean needsExcessPopulation;
+    protected boolean needsExcessGoods;
+    protected boolean needsExcessLifestyle;
+
 
     public Zone (int coordinateX, int coordinateY)
     {
@@ -89,5 +108,47 @@ public abstract class Zone extends Cell
 
     public void setOutput(int value) {
         output = value;
+    }
+
+    // Getters for necessary fields
+
+    public boolean isNeedsElectricity() {
+        return needsElectricity;
+    }
+    public boolean isNeedsWater() {
+        return needsWater;
+    }
+    public boolean isNeedsInternet() {
+        return needsInternet;
+    }
+
+    public boolean isNeedsHealth() {
+        return needsHealth;
+    }
+    public boolean isNeedsSecurity() {
+        return needsSecurity;
+    }
+    public boolean isNeedsEducation() {
+        return needsEducation;
+    }
+
+    public boolean isNeedsGoods() {
+        return needsGoods;
+    }
+    public boolean isNeedsLifestyle() {
+        return needsLifestyle;
+    }
+    public boolean isNeedsPopulation() {
+        return needsPopulation;
+    }
+
+    public boolean isNeedsExcessGoods() {
+        return needsExcessGoods;
+    }
+    public boolean isNeedsExcessLifestyle() {
+        return needsExcessLifestyle;
+    }
+    public boolean isNeedsExcessPopulation() {
+        return needsExcessPopulation;
     }
 }

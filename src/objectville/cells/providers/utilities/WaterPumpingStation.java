@@ -14,7 +14,7 @@ public class WaterPumpingStation extends UtilityProvider
     public void provideUtility(Cell grid)
     {
         int zoneDemand = 0;
-        if (grid instanceof Zone)
+        if (grid instanceof Zone && ((Zone) grid).isNeedsWater())
         {
             zoneDemand = ((Zone) grid).getUtilityDemand();
             ((Zone) grid).receiveInternet(Math.min(utility, zoneDemand));

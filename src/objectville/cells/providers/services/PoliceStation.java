@@ -13,8 +13,10 @@ public class PoliceStation extends ServiceProvider
     @Override
     public void provideService(Cell grid)
     {
-        if (grid instanceof Zone)
+        if (grid instanceof Zone && ((Zone) grid).isNeedsSecurity())
+        {
             ((Zone) grid).setHasSecurity(true);
-        System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateX() + "," + getCoordinateY() + ") received security service");
+            System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateX() + "," + getCoordinateY() + ") received security service");
+        }
     }
 }

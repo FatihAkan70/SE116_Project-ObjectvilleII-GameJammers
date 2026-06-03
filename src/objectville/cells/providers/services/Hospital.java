@@ -13,7 +13,8 @@ public class Hospital extends ServiceProvider
     @Override
     public void provideService(Cell grid)
     {
-        if (grid instanceof Zone) {
+        if (grid instanceof Zone && ((Zone) grid).isNeedsHealth())
+        {
             ((Zone) grid).setHasHealth(true);
             System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateX() + "," + getCoordinateY() + ") received health service");
         }

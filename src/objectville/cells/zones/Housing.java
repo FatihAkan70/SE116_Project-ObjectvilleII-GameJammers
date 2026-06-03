@@ -4,6 +4,14 @@ public class Housing extends Zone {
 
     public Housing(int coordinateX, int coordinateY) {
         super(coordinateX, coordinateY);
+
+        needsElectricity = true;
+        needsWater = true;
+        needsInternet = true;
+
+        needsSecurity = false;
+        needsEducation = false;
+        needsHealth = false;
     }
 
     @Override
@@ -44,6 +52,39 @@ public class Housing extends Zone {
         }
         // 3 to 2
 
+
+        if (this.getLevel() == 0 || this.getLevel() == 1)
+        {
+            needsElectricity = true;
+            needsWater = true;
+            needsInternet = true;
+        }
+
+        if (this.getLevel() == 2)
+        {
+            needsElectricity = true;
+            needsWater = true;
+            needsInternet = true;
+
+            // Level 2 needs
+            needsSecurity = true;
+            needsHealth = true;
+            needsEducation = true;
+        }
+
+        if (this.getLevel() == 3)
+        {
+            needsElectricity = true;
+            needsWater = true;
+            needsInternet = true;
+
+            needsSecurity = true;
+            needsHealth = true;
+            needsEducation = true;
+
+            // Level 3 needs
+            needsLifestyle = true;
+        }
     }
 
     @Override

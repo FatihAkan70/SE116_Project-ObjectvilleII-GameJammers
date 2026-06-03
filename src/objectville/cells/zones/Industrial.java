@@ -4,6 +4,17 @@ public class Industrial extends Zone{
 
     public Industrial(int coordinateX, int coordinateY) {
         super(coordinateX, coordinateY);
+
+        needsPopulation = true;
+
+        needsElectricity = true;
+        needsWater = true;
+
+        needsSecurity = false;
+        needsEducation = false;
+        needsHealth = false;
+
+        needsExcessPopulation = false;
     }
 
     @Override
@@ -50,6 +61,35 @@ public class Industrial extends Zone{
         }
         // 3 to 2
 
+
+        if (this.getLevel() == 0 || this.getLevel() == 1)
+        {
+            needsPopulation = true;
+            needsElectricity = true;
+            needsWater = true;
+        }
+
+        if (this.getLevel() == 2)
+        {
+            needsPopulation = true;
+            needsElectricity = true;
+            needsWater = true;
+
+            // Level 2 needs
+            needsSecurity = true;
+        }
+
+        if (this.getLevel() == 3)
+        {
+            needsPopulation = true;
+            needsElectricity = true;
+            needsWater = true;
+
+            needsSecurity = true;
+
+            // Level 3 needs
+            needsExcessPopulation = true;
+        }
     }
 
     @Override

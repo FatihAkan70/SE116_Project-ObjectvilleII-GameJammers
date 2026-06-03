@@ -4,6 +4,20 @@ public class Commercial extends Zone {
 
     public Commercial(int coordinateX, int coordinateY) {
         super(coordinateX, coordinateY);
+
+        needsPopulation = true;
+        needsGoods = true;
+
+        needsElectricity = true;
+        needsWater = true;
+        needsInternet = true;
+
+        needsSecurity = false;
+        needsEducation = false;
+        needsHealth = false;
+
+        needsExcessLifestyle = false;
+        needsExcessGoods = false;
     }
 
     @Override
@@ -50,6 +64,45 @@ public class Commercial extends Zone {
         }
         // 3 to 2
 
+        if (this.getLevel() == 0 || this.getLevel() == 1)
+        {
+            needsPopulation = true;
+            needsGoods = true;
+
+            needsElectricity = true;
+            needsWater = true;
+            needsInternet = true;
+        }
+
+        if (this.getLevel() == 2)
+        {
+            needsPopulation = true;
+            needsGoods = true;
+
+            needsElectricity = true;
+            needsWater = true;
+            needsInternet = true;
+
+            // Level 2 needs
+            needsSecurity = true;
+
+        }
+
+        if (this.getLevel() == 3)
+        {
+            needsPopulation = true;
+            needsGoods = true;
+
+            needsElectricity = true;
+            needsWater = true;
+            needsInternet = true;
+
+            needsSecurity = true;
+
+            // Level 3 needs
+            needsExcessLifestyle = true;
+            needsExcessGoods = true;
+        }
     }
 
     @Override

@@ -13,8 +13,10 @@ public class School extends ServiceProvider
     @Override
     public void provideService(Cell grid)
     {
-        if (grid instanceof Zone)
+        if (grid instanceof Zone && ((Zone) grid).isNeedsEducation())
+        {
             ((Zone) grid).setHasEducation(true);
-        System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateX() + "," + getCoordinateY() + ") received education service");
+            System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateX() + "," + getCoordinateY() + ") received education service");
+        }
     }
 }

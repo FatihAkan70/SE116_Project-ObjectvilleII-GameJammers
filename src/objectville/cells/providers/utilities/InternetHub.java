@@ -14,7 +14,7 @@ public class InternetHub extends UtilityProvider
     public void provideUtility(Cell grid)
     {
         int zoneDemand = 0;
-        if (grid instanceof Zone)
+        if (grid instanceof Zone && ((Zone) grid).isNeedsInternet())
         {
             zoneDemand = ((Zone) grid).getUtilityDemand();
             ((Zone) grid).receiveInternet(Math.min(utility, zoneDemand));

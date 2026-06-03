@@ -14,7 +14,7 @@ public class PowerPlant extends UtilityProvider
     public void provideUtility(Cell grid)
     {
         int zoneDemand = 0;
-        if (grid instanceof Zone)
+        if (grid instanceof Zone && ((Zone) grid).isNeedsElectricity())
         {
             zoneDemand = ((Zone) grid).getUtilityDemand();
             ((Zone) grid).receiveInternet(Math.min(utility, zoneDemand));
