@@ -13,10 +13,7 @@ public abstract class ServiceProvider extends Cell
         this.radius = radius;
     }
 
-    public void provideService(Cell grid)
-    {
-        System.out.println("WIP");
-    }
+    public abstract void provideService(Cell grid);
 
     // Uses Manhattan Distance
     public void distributeService(Cell[][] gridMap)
@@ -27,6 +24,12 @@ public abstract class ServiceProvider extends Cell
             for (int y = -radius; y < radius + 1 ; y++)
             {
                 if (x == 0 && y == 0)
+                    continue;
+                else if (coordinateX + x < 0 || coordinateY + y < 0)
+                    continue;
+                else if (coordinateX + x > gridMap.length || coordinateY + y > gridMap[coordinateX + x].length)
+                    continue;
+                else if (Math.abs(x) + Math.abs(y) > radius)
                     continue;
 
                 provideService(gridMap[coordinateX + x][coordinateY + y]);

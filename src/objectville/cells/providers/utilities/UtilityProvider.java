@@ -76,7 +76,7 @@ public abstract class UtilityProvider extends Cell
         for (int x = -layerCounter; x < layerCounter + 1 ; x++)
         {
             // Makes sure that the current grid is inside the map
-            if (coordinateX + x < 0 || coordinateY - layerCounter <= 0)
+            if (coordinateX + x < 0 || coordinateY - layerCounter < 0)
                 continue;
             else if (coordinateX + x >= gridMap.length || coordinateY - layerCounter >= gridMap[coordinateX + x].length)
                 continue;
@@ -96,6 +96,10 @@ public abstract class UtilityProvider extends Cell
                 {
                     if (connectedToSystem)
                         break connectionTester;
+                    else if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
+                        continue;
+                    else if (currentGrid.getCoordinateX() + i > gridMap.length || currentGrid.getCoordinateY() + z > gridMap[currentGrid.getCoordinateX() + i].length)
+                        continue;
                     else if (connectedToUtilityProvider.contains(gridMap[currentGrid.getCoordinateX() + i][currentGrid.getCoordinateY() + z]))
                         connectedToSystem = true;
                 }
@@ -106,12 +110,9 @@ public abstract class UtilityProvider extends Cell
             // Test if grid type is eligible to receive utility
             if (!(currentGrid instanceof Zone || currentGrid instanceof Road))
                 continue;
-            // Known Bug: Utility will go below 0 because checks are calculated after utility is distributed
-            if (utility <= 0)
-                break;
-            provideUtility(currentGrid);
-            connectedToUtilityProvider.add(currentGrid);
-            hasSpreadOnceAtCurrentLayer = true;
+
+            // Breaks if utility becomes zero
+            if (handleDistribution(connectedToUtilityProvider, currentGrid)) break;
 
             // A debug code to make life easier, will get removed on release
             System.out.println("Debug: Current location in grid X:" + (coordinateX + x) + " Y:" + (coordinateY - layerCounter));
@@ -123,7 +124,7 @@ public abstract class UtilityProvider extends Cell
         for (int y = -layerCounter; y < layerCounter + 1 ; y++)
         {
             // Makes sure that the current grid is inside the map
-            if (coordinateX + layerCounter < 0 || coordinateY + y <= 0)
+            if (coordinateX + layerCounter < 0 || coordinateY + y < 0)
                 continue;
             else if (coordinateX + layerCounter >= gridMap.length || coordinateY + y >= gridMap[coordinateX + layerCounter].length)
                 continue;
@@ -143,6 +144,10 @@ public abstract class UtilityProvider extends Cell
                 {
                     if (connectedToSystem)
                         break connectionTester;
+                    else if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
+                        continue;
+                    else if (currentGrid.getCoordinateX() + i > gridMap.length || currentGrid.getCoordinateY() + z > gridMap[currentGrid.getCoordinateX() + i].length)
+                        continue;
                     else if (connectedToUtilityProvider.contains(gridMap[coordinateX + i][coordinateY + z]))
                         connectedToSystem = true;
                 }
@@ -154,12 +159,9 @@ public abstract class UtilityProvider extends Cell
             // Test if grid type is eligible to receive utility
             if (!(currentGrid instanceof Zone || currentGrid instanceof Road))
                 continue;
-            // Known Bug: Utility will go below 0 because checks are calculated after utility is distributed
-            if (utility <= 0)
-                break;
-            provideUtility(currentGrid);
-            connectedToUtilityProvider.add(currentGrid);
-            hasSpreadOnceAtCurrentLayer = true;
+
+            // Breaks if utility becomes zero
+            if (handleDistribution(connectedToUtilityProvider, currentGrid)) break;
 
             // A debug code to make life easier, will get removed on release
             System.out.println("Debug: Current location in grid X:" + (coordinateX + layerCounter) + " Y:" + (coordinateY + y));
@@ -171,7 +173,7 @@ public abstract class UtilityProvider extends Cell
         for (int x = -layerCounter; x < layerCounter + 1 ; x++)
         {
             // Makes sure that the current grid is inside the map
-            if (coordinateX - x < 0 || coordinateY + layerCounter <= 0)
+            if (coordinateX - x < 0 || coordinateY + layerCounter < 0)
                 continue;
             else if (coordinateX - x >= gridMap.length || coordinateY + layerCounter >= gridMap[coordinateX - x].length)
                 continue;
@@ -191,6 +193,10 @@ public abstract class UtilityProvider extends Cell
                 {
                     if (connectedToSystem)
                         break connectionTester;
+                    else if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
+                        continue;
+                    else if (currentGrid.getCoordinateX() + i > gridMap.length || currentGrid.getCoordinateY() + z > gridMap[currentGrid.getCoordinateX() + i].length)
+                        continue;
                     else if (connectedToUtilityProvider.contains(gridMap[coordinateX + i][coordinateY + z]))
                         connectedToSystem = true;
                 }
@@ -202,12 +208,9 @@ public abstract class UtilityProvider extends Cell
             // Test if grid type is eligible to receive utility
             if (!(currentGrid instanceof Zone || currentGrid instanceof Road))
                 continue;
-            // Known Bug: Utility will go below 0 because checks are calculated after utility is distributed
-            if (utility <= 0)
-                break;
-            provideUtility(currentGrid);
-            connectedToUtilityProvider.add(currentGrid);
-            hasSpreadOnceAtCurrentLayer = true;
+
+            // Breaks if utility becomes zero
+            if (handleDistribution(connectedToUtilityProvider, currentGrid)) break;
 
             // A debug code to make life easier, will get removed on release
             System.out.println("Debug: Current location in grid X:" + (coordinateX - x) + " Y:" + (coordinateY + layerCounter));
@@ -219,7 +222,7 @@ public abstract class UtilityProvider extends Cell
         for (int y = -layerCounter; y < layerCounter + 1 ; y++)
         {
             // Makes sure that the current grid is inside the map
-            if (coordinateX - layerCounter < 0 || coordinateY - y <= 0)
+            if (coordinateX - layerCounter < 0 || coordinateY - y < 0)
                 continue;
             else if (coordinateX - layerCounter >= gridMap.length || coordinateY - y >= gridMap[coordinateX -layerCounter].length)
                 continue;
@@ -239,6 +242,10 @@ public abstract class UtilityProvider extends Cell
                 {
                     if (connectedToSystem)
                         break connectionTester;
+                    else if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
+                        continue;
+                    else if (currentGrid.getCoordinateX() + i > gridMap.length || currentGrid.getCoordinateY() + z > gridMap[currentGrid.getCoordinateX() + i].length)
+                        continue;
                     else if (connectedToUtilityProvider.contains(gridMap[coordinateX + i][coordinateY + z]))
                         connectedToSystem = true;
                 }
@@ -249,17 +256,31 @@ public abstract class UtilityProvider extends Cell
             // Test if grid type is eligible to receive utility
             if (!(currentGrid instanceof Zone || currentGrid instanceof Road))
                 continue;
-            // Known Bug: Utility will go below 0 because checks are calculated after utility is distributed
-            else if (utility <= 0)
-                break;
 
-            provideUtility(currentGrid);
-            connectedToUtilityProvider.add(currentGrid);
-            hasSpreadOnceAtCurrentLayer = true;
+            // Breaks if utility becomes zero
+            if (handleDistribution(connectedToUtilityProvider, currentGrid)) break;
 
             // A debug code to make life easier, will get removed on release
             System.out.println("Debug: Current location in grid X:" + (coordinateX - layerCounter) + " Y:" + (coordinateY - y));
         }
+    }
+
+
+    // Private methods to be used by in class Methods
+    private boolean handleDistribution(ArrayList<Cell> connectedToUtilityProvider, Cell currentGrid)
+    {
+        if (utility <= 0)
+            return true;
+
+        if (currentGrid instanceof Zone)
+            provideUtility(currentGrid);
+        connectedToUtilityProvider.add(currentGrid);
+        hasSpreadOnceAtCurrentLayer = true;
+
+        if (utility <= 0)
+            return true;
+
+        return false;
     }
 
 }
