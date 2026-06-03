@@ -53,7 +53,7 @@ public abstract class Zone extends Cell
     }
 
     public int getUtilityDemand() {
-        return Math.max(1, output);
+        return Math.max(1, computeOutput());
     }
 
     public abstract int computeOutput();
@@ -61,7 +61,7 @@ public abstract class Zone extends Cell
     public abstract void updateLevel();
 
     public int getLevel() { return level; }
-    public int getOutput() { return output; }
+    public int getOutput() { return computeOutput(); }
 
     public void resetTickInputs() {
         receivedElectricity = 0;

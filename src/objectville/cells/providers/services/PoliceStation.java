@@ -16,7 +16,7 @@ public class PoliceStation extends ServiceProvider
         if (grid instanceof Zone && ((Zone) grid).isNeedsSecurity())
         {
             ((Zone) grid).setHasSecurity(true);
-            System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateX() + "," + getCoordinateY() + ") received security service");
+            System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateX() + "," + grid.getCoordinateY() + ") received security service");
         }
     }
 }

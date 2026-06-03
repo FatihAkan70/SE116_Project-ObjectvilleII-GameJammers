@@ -114,8 +114,6 @@ public abstract class UtilityProvider extends Cell
             // Breaks if utility becomes zero
             if (handleDistribution(connectedToUtilityProvider, currentGrid)) break;
 
-            // A debug code to make life easier, will get removed on release
-            System.out.println("Debug: Current location in grid X:" + (coordinateX + x) + " Y:" + (coordinateY - layerCounter));
         }
     }
 
@@ -163,8 +161,6 @@ public abstract class UtilityProvider extends Cell
             // Breaks if utility becomes zero
             if (handleDistribution(connectedToUtilityProvider, currentGrid)) break;
 
-            // A debug code to make life easier, will get removed on release
-            System.out.println("Debug: Current location in grid X:" + (coordinateX + layerCounter) + " Y:" + (coordinateY + y));
         }
     }
 
@@ -212,8 +208,6 @@ public abstract class UtilityProvider extends Cell
             // Breaks if utility becomes zero
             if (handleDistribution(connectedToUtilityProvider, currentGrid)) break;
 
-            // A debug code to make life easier, will get removed on release
-            System.out.println("Debug: Current location in grid X:" + (coordinateX - x) + " Y:" + (coordinateY + layerCounter));
         }
     }
 
@@ -260,8 +254,6 @@ public abstract class UtilityProvider extends Cell
             // Breaks if utility becomes zero
             if (handleDistribution(connectedToUtilityProvider, currentGrid)) break;
 
-            // A debug code to make life easier, will get removed on release
-            System.out.println("Debug: Current location in grid X:" + (coordinateX - layerCounter) + " Y:" + (coordinateY - y));
         }
     }
 

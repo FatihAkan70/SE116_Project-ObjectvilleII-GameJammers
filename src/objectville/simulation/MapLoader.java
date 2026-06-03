@@ -4,11 +4,19 @@ import java.io.BufferedReader; //for file reading
 import java.io.FileReader;     //
 import java.io.IOException;    //for exception throwing
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import objectville.cells.providers.services.Hospital;
+import objectville.cells.providers.services.PoliceStation;
+import objectville.cells.providers.services.School;
+import objectville.cells.providers.utilities.InternetHub;
+import objectville.cells.providers.utilities.PowerPlant;
+import objectville.cells.providers.utilities.WaterPumpingStation;
 import objectville.grid.Cell;  //Cell[][]
 
 import objectville.cells.infrastructure.* ; //for using later
 import objectville.cells.zones.* ;
+import objectville.grid.EmptyCell;
 
 public class MapLoader {
 
@@ -22,31 +30,88 @@ public class MapLoader {
             String line;
             while ((line = br.readLine()) != null) {
 
-                int trimmed= line.trim().length();
+                int trimmed = line.trim().length();
                 if (trimmed > 0) {
-                    lines.add(line.trim()); }
+                    lines.add(line.trim());
+                }
             }
         }
 
         // checking for empty file
         if (lines.size() == 0) {
-            throw new IllegalArgumentException( " File is empty ! "  ); }
+            throw new IllegalArgumentException(" File is empty ! ");
+        }
 
         int tCoordinateY = lines.size(); //total line num is y
         int tCoordinateX = lines.get(0).length(); //the top lines char num is x
 
         Cell[][] cell = new Cell[tCoordinateY][tCoordinateX];
 
+        HashMap<String, Object> objectHashMap = new HashMap<>(10);
+
         //reaching one by one from y to totalY
         for (int coordinateY = 0; coordinateY < tCoordinateY; coordinateY++) {
             String rowString = lines.get(coordinateY);
             for (int coordinateX = 0; coordinateX < tCoordinateX; coordinateX++) {
                 char type = rowString.charAt(coordinateX); //character parsing
-               // cell[coordinateY][coordinateX] = we need a func there to take our parsed chars and put them on a new cell.
-            }
-        }
+                switch (type) {
 
+                    // Zones
+                    case 'H':
+                        cell[coordinateY][coordinateX] = new Housing(coordinateX, coordinateY);
+                        break;
+
+                    case 'C':
+                        cell[coordinateY][coordinateX] = new Commercial(coordinateX, coordinateY);
+                        break;
+
+                    case 'I':
+                        cell[coordinateY][coordinateX] = new Industrial(coordinateX, coordinateY);
+                        break;
+
+                    // Services
+                    case 'S':
+                        cell[coordinateY][coordinateX] = new School(coordinateX, coordinateY);
+                        break;
+
+                    case 'F':
+                        cell[coordinateY][coordinateX] = new PoliceStation(coordinateX, coordinateY);
+                        break;
+
+                    case 'D': // Hospital için H kullanıldığı için örnek olarak O
+                        cell[coordinateY][coordinateX] = new Hospital(coordinateX, coordinateY);
+                        break;
+
+                    // Utilities
+                    case 'T':
+                        cell[coordinateY][coordinateX] = new InternetHub(100, coordinateX, coordinateY);
+                        break;
+
+                    case 'W':
+                        cell[coordinateY][coordinateX] = new WaterPumpingStation(100, coordinateX, coordinateY);
+                        break;
+
+                    case 'P':
+                        cell[coordinateY][coordinateX] = new PowerPlant(100, coordinateX, coordinateY);
+                        break;
+
+                    // Infrastructure
+                    case 'R':
+                        cell[coordinateY][coordinateX] = new Road(coordinateX, coordinateY);
+                        break;
+
+                    case 'E':
+                        cell[coordinateY][coordinateX] = new EmptyCell(coordinateX,coordinateY);
+                        break;
+                    default:
+                        throw new IllegalArgumentException(
+                                "Unknown map character: " + type +
+                                        " at (" + coordinateX + "," + coordinateY + ")"
+                        );
+                }
+            }
+
+        }
         return cell;
     }
-
 }

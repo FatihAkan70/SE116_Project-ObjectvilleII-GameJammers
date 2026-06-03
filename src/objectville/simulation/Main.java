@@ -1,5 +1,8 @@
 package objectville.simulation;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -7,6 +10,8 @@ public class Main {
         //checking if both the
         //filename:(where the map data is stored) and the
         //tick count:(how long the simulation runs) are provided or not
+
+        /*
         if (args.length < 2) {
             //Fail Fast mechanism
 
@@ -31,5 +36,20 @@ public class Main {
         catch (Exception e) {
             System.out.println( " Error: Invalid tick count! " );
             return; }
+        */
+
+        String fileName = "map00.txt";
+        int tickCount = 10;
+
+        SimulationManager testManager = new SimulationManager();
+        MapLoader testLoader = new MapLoader();
+        ResourcePool testPool = new ResourcePool();
+
+        try {
+            testManager.run(testLoader.mapLoad(Paths.get(fileName).toAbsolutePath().toString()), tickCount, testPool);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

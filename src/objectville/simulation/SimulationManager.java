@@ -65,7 +65,6 @@ public class SimulationManager{
     private void logZone(Zone z, int oldLevel) {
         String name;
         String resource;
-
         if (z instanceof Housing)    { name = "House";       resource = "population"; }
         else if (z instanceof Industrial) { name = "Industrial"; resource = "goods"; }
         else if (z instanceof Commercial) { name = "Commercial"; resource = "lifestyle"; }
