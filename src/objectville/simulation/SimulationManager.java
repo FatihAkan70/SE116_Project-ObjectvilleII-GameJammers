@@ -78,5 +78,8 @@ public class SimulationManager{
             System.out.println(name + " at " + loc + " levels up from " + oldLevel + " to " + newLevel);
         else if (newLevel < oldLevel)
             System.out.println(name + " at " + loc + " levels down from " + oldLevel + " to " + newLevel );
+        else {
+            System.out.println(name + " at " + loc + " did not leveled up");
+        }
     }
 }

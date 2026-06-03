@@ -17,7 +17,7 @@ public class PowerPlant extends UtilityProvider
         if (grid instanceof Zone && ((Zone) grid).isNeedsElectricity())
         {
             zoneDemand = ((Zone) grid).getUtilityDemand();
-            ((Zone) grid).receiveInternet(Math.min(utility, zoneDemand));
+            ((Zone) grid).receiveElectricity(Math.min(utility, zoneDemand));
             System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateX() + "," + grid.getCoordinateY() + ") received " + Math.min(utility, zoneDemand) + " electricity");
         }
         if (utility <= zoneDemand)

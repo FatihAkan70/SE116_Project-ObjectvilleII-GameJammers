@@ -17,7 +17,7 @@ public class WaterPumpingStation extends UtilityProvider
         if (grid instanceof Zone && ((Zone) grid).isNeedsWater())
         {
             zoneDemand = ((Zone) grid).getUtilityDemand();
-            ((Zone) grid).receiveInternet(Math.min(utility, zoneDemand));
+            ((Zone) grid).receiveWater(Math.min(utility, zoneDemand));
             System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateX() + "," + grid.getCoordinateY() + ") received " + Math.min(utility, zoneDemand) + " water");
         }
         if (utility <= zoneDemand)
