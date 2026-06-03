@@ -27,7 +27,7 @@ public abstract class ServiceProvider extends Cell
                     continue;
                 else if (coordinateX + x < 0 || coordinateY + y < 0)
                     continue;
-                else if (coordinateX + x > gridMap.length || coordinateY + y > gridMap[coordinateX + x].length)
+                else if (coordinateX + x >= gridMap.length || coordinateY + y >= gridMap[coordinateX + x].length)
                     continue;
                 else if (Math.abs(x) + Math.abs(y) > radius)
                     continue;

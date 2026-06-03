@@ -98,7 +98,7 @@ public abstract class UtilityProvider extends Cell
                         break connectionTester;
                     else if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
                         continue;
-                    else if (currentGrid.getCoordinateX() + i > gridMap.length || currentGrid.getCoordinateY() + z > gridMap[currentGrid.getCoordinateX() + i].length)
+                    else if (currentGrid.getCoordinateX() + i >= gridMap.length || currentGrid.getCoordinateY() + z >= gridMap[currentGrid.getCoordinateX() + i].length)
                         continue;
                     else if (connectedToUtilityProvider.contains(gridMap[currentGrid.getCoordinateX() + i][currentGrid.getCoordinateY() + z]))
                         connectedToSystem = true;
@@ -146,7 +146,7 @@ public abstract class UtilityProvider extends Cell
                         break connectionTester;
                     else if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
                         continue;
-                    else if (currentGrid.getCoordinateX() + i > gridMap.length || currentGrid.getCoordinateY() + z > gridMap[currentGrid.getCoordinateX() + i].length)
+                    else if (currentGrid.getCoordinateX() + i >= gridMap.length || currentGrid.getCoordinateY() + z >= gridMap[currentGrid.getCoordinateX() + i].length)
                         continue;
                     else if (connectedToUtilityProvider.contains(gridMap[coordinateX + i][coordinateY + z]))
                         connectedToSystem = true;
@@ -195,7 +195,7 @@ public abstract class UtilityProvider extends Cell
                         break connectionTester;
                     else if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
                         continue;
-                    else if (currentGrid.getCoordinateX() + i > gridMap.length || currentGrid.getCoordinateY() + z > gridMap[currentGrid.getCoordinateX() + i].length)
+                    else if (currentGrid.getCoordinateX() + i >= gridMap.length || currentGrid.getCoordinateY() + z >= gridMap[currentGrid.getCoordinateX() + i].length)
                         continue;
                     else if (connectedToUtilityProvider.contains(gridMap[coordinateX + i][coordinateY + z]))
                         connectedToSystem = true;
@@ -244,7 +244,7 @@ public abstract class UtilityProvider extends Cell
                         break connectionTester;
                     else if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
                         continue;
-                    else if (currentGrid.getCoordinateX() + i > gridMap.length || currentGrid.getCoordinateY() + z > gridMap[currentGrid.getCoordinateX() + i].length)
+                    else if (currentGrid.getCoordinateX() + i >= gridMap.length || currentGrid.getCoordinateY() + z >= gridMap[currentGrid.getCoordinateX() + i].length)
                         continue;
                     else if (connectedToUtilityProvider.contains(gridMap[coordinateX + i][coordinateY + z]))
                         connectedToSystem = true;
