@@ -17,41 +17,42 @@ public class Housing extends Zone {
     @Override
     public void updateLevel() {
 
-        if (this.receivedElectricity == 0 || this.receivedInternet == 0 || this.receivedWater == 0) {
+        if (this.receivedElectricity == 0 || this.receivedWater == 0 || this.receivedInternet == 0) {
+            // shutdown
             this.level = 0;
-            return;
         }
-        // shutdown to 0
+        else {
+            if (this.level == 0) {
+                // 0 to 1
+                this.level = 1;
+            }
+            else if (this.level == 1) {
 
-        if (this.level == 0 & this.receivedElectricity > 0 & this.receivedInternet > 0 & this.receivedWater > 0) {
-            this.level = 1;
-            return;
+                if (this.hasSecurity && this.hasHealth && this.hasEducation) {
+                    // 1 to 2
+                    this.level = 2;
+                }
+            }
+            else if (this.level == 2) {
+
+                if (!this.hasSecurity || !this.hasHealth || !this.hasEducation) {
+                    // 2 to 1
+                    this.level = 1;
+                }
+
+                else if (this.receivedLifestyle > 0) {
+                    // 2 to 3
+                    this.level = 3;
+                }
+            }
+            else if (this.level == 3) {
+
+                if (this.receivedLifestyle <= 0 || !this.hasSecurity || !this.hasHealth || !this.hasEducation) {
+                    // 3 to 2
+                    this.level = 2;
+                }
+            }
         }
-        // 0 to 1
-
-        if (this.level == 1 & this.hasSecurity & this.hasEducation & this.hasHealth) {
-            this.level = 2;
-            return;
-        }
-        // 1 to 2
-
-        if ((this.level == 2) & (!this.hasHealth || !this.hasSecurity || !this.hasEducation)) {
-            this.level = 1;
-            return;
-        }
-        // 2 to 1
-
-        if (this.level == 2 & this.receivedLifestyle > 0) {
-            this.level = 3;
-            return;
-        }
-        // 2 to 3
-
-        if (this.level == 3 & this.receivedLifestyle == 0) {
-            this.level = 2;
-        }
-        // 3 to 2
-
 
         if (this.getLevel() == 0 || this.getLevel() == 1)
         {

@@ -24,46 +24,45 @@ public class Commercial extends Zone {
     public void updateLevel() {
 
         if (this.receivedElectricity == 0 || this.receivedWater == 0 || this.receivedInternet == 0) {
+            //shutdown
             this.level = 0;
-            return;
         }
-        // shutdown to 0
+        else {
+            if (this.level == 0) {
+                if (this.receivedPopulation > 0 && this.receivedGoods > 0) {
+                    // 0 to 1
+                    this.level = 1;
+                }
+            }
+            else if (this.level == 1) {
+                if (this.receivedPopulation == 0 || this.receivedGoods == 0) {
+                    // 1 to 0
+                    this.level = 0;
+                }
+                else if (this.hasSecurity) {
+                    // 1 to 2
+                    this.level = 2;
+                }
+            }
+            else if (this.level == 2) {
 
-        if (this.level == 0 & receivedPopulation > 0 & receivedGoods > 0) {
-            this.level = 1;
-            return;
+                if (!this.hasSecurity || this.receivedPopulation == 0 || this.receivedGoods == 0) {
+                    // 2 to 1
+                    this.level = 1;
+                }
+
+                else if (this.receivedPopulation > this.computeOutput() && this.receivedGoods > this.computeOutput()) {
+                    // 2 to 3
+                    this.level = 3;
+                }
+            }
+            else if (this.level == 3) {
+                // 3 to 2
+                if (!this.hasSecurity || this.receivedPopulation <= this.computeOutput() || this.receivedGoods <= this.computeOutput()) {
+                    this.level = 2;
+                }
+            }
         }
-        // 0 to 1
-
-        if (this.level == 1 & (receivedPopulation == 0 || receivedGoods == 0)) {
-            this.level = 0;
-            return;
-        }
-        // 1 to 0
-
-        if (this.level == 1 & this.hasSecurity) {
-            this.level = 2;
-            return;
-        }
-        // 1 to 2
-
-        if ((this.level == 2) & (!this.hasSecurity || this.receivedPopulation == 0 || this.receivedGoods == 0)) {
-            this.level = 1;
-            return;
-        }
-        // 2 to 1
-
-        if (this.level == 2 & this.receivedPopulation > this.computeOutput() & this.receivedGoods > this.computeOutput()) {
-            this.level = 3;
-            return;
-        }
-        // 2 to 3
-
-        if (this.level == 3 & (this.receivedPopulation <= this.computeOutput() || this.receivedGoods <= this.computeOutput())) {
-            this.level = 2;
-        }
-        // 3 to 2
-
         if (this.getLevel() == 0 || this.getLevel() == 1)
         {
             needsPopulation = true;
