@@ -45,6 +45,7 @@ public abstract class UtilityProvider extends Cell
             // Checks if the utility has any place it could spread to, if not ends loop so it does not go to infinity.
             if (!hasSpreadOnceAtCurrentLayer)
             {
+                generateUtility();
                 break;
             }
             hasSpreadOnceAtCurrentLayer = false;
@@ -146,7 +147,7 @@ public abstract class UtilityProvider extends Cell
                         continue;
                     else if (currentGrid.getCoordinateX() + i >= gridMap.length || currentGrid.getCoordinateY() + z >= gridMap[currentGrid.getCoordinateX() + i].length)
                         continue;
-                    else if (connectedToUtilityProvider.contains(gridMap[coordinateX + i][coordinateY + z]))
+                    else if (connectedToUtilityProvider.contains(gridMap[currentGrid.getCoordinateX() + i][currentGrid.getCoordinateY() + z]))
                         connectedToSystem = true;
                 }
             }
@@ -193,7 +194,7 @@ public abstract class UtilityProvider extends Cell
                         continue;
                     else if (currentGrid.getCoordinateX() + i >= gridMap.length || currentGrid.getCoordinateY() + z >= gridMap[currentGrid.getCoordinateX() + i].length)
                         continue;
-                    else if (connectedToUtilityProvider.contains(gridMap[coordinateX + i][coordinateY + z]))
+                    else if (connectedToUtilityProvider.contains(gridMap[currentGrid.getCoordinateX() + i][currentGrid.getCoordinateY() + z]))
                         connectedToSystem = true;
                 }
             }
@@ -240,7 +241,7 @@ public abstract class UtilityProvider extends Cell
                         continue;
                     else if (currentGrid.getCoordinateX() + i >= gridMap.length || currentGrid.getCoordinateY() + z >= gridMap[currentGrid.getCoordinateX() + i].length)
                         continue;
-                    else if (connectedToUtilityProvider.contains(gridMap[coordinateX + i][coordinateY + z]))
+                    else if (connectedToUtilityProvider.contains(gridMap[currentGrid.getCoordinateX() + i][currentGrid.getCoordinateY() + z]))
                         connectedToSystem = true;
                 }
             }
