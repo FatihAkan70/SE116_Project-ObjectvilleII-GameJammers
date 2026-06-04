@@ -73,18 +73,7 @@ public abstract class Zone extends Cell
         receivedPopulation = 0;
         receivedGoods = 0;
         receivedLifestyle = 0;
-        needsSecurity = false;
-        needsHealth = false;
-        needsEducation = false;
-        needsElectricity = false;
-        needsWater = false;
-        needsInternet = false;
-        needsPopulation = false;
-        needsGoods = false;
-        needsLifestyle = false;
-        needsExcessPopulation = false;
-        needsExcessGoods = false;
-        needsExcessLifestyle = false;
+
     }
 
     // Setters for such attributes.
