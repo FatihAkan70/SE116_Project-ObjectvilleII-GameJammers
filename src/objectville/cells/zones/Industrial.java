@@ -2,6 +2,10 @@ package objectville.cells.zones;
 
 public class Industrial extends Zone {
 
+    public void setReceivedPopulation(int population) {
+        this.receivedPopulation = population;
+    }
+
     public Industrial(int coordinateX, int coordinateY) {
         super(coordinateX, coordinateY);
 

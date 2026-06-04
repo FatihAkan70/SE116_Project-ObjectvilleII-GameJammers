@@ -127,4 +127,11 @@ public class Commercial extends Zone {
 
         return this.output;
     }
+
+    public void setReceivedPopulation(int population) {
+        this.receivedPopulation = population;
+    }
+    public void setReceivedGoods(int goods) {
+        this.receivedGoods = goods;
+    }
 }

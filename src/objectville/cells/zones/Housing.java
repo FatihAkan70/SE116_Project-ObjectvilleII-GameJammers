@@ -110,4 +110,8 @@ public class Housing extends Zone {
 
         return this.output;
     }
+
+    public void setReceivedLifestyle(int lifestyle) {
+        this.receivedLifestyle = lifestyle;
+    }
 }

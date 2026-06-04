@@ -11,38 +11,19 @@ import java.util.List;
 
 public class ResourcePool {
 
-    // from the previous tick
     private int totalPopulation;
     private int totalGoods;
     private int totalLifestyle;
 
     public ResourcePool() {
-        totalPopulation = 0;
-        totalGoods = 0;
-        totalLifestyle = 0;
-    }
-
-    // calculate total values of these attributes.
-    public void accumulate(Cell[][] grid) {
-        totalPopulation = 0;
-        totalGoods = 0;
-        totalLifestyle = 0;
-
-        for (Cell[] row : grid) {
-            for (Cell cell : row) {
-                if (cell instanceof Housing h) {
-                    totalPopulation += h.getOutput();
-                } else if (cell instanceof Industrial i) {
-                    totalGoods += i.getOutput();
-                } else if (cell instanceof Commercial c) {
-                    totalLifestyle += c.getOutput();
-                }
-            }
-        }
+        this.totalPopulation = 0;
+        this.totalGoods = 0;
+        this.totalLifestyle = 0;
     }
 
 
     public void distribute(Cell[][] grid) {
+        if (grid == null) return;
 
         List<Industrial> industrials = new ArrayList<>();
         List<Commercial> commercials = new ArrayList<>();
@@ -50,29 +31,63 @@ public class ResourcePool {
 
         for (Cell[] row : grid) {
             for (Cell cell : row) {
-                if (cell instanceof Industrial i) industrials.add(i);
-                else if (cell instanceof Commercial c) commercials.add(c);
-                else if (cell instanceof Housing h) housings.add(h);
+                if (cell instanceof Industrial i) {
+                    industrials.add(i);
+                } else if (cell instanceof Commercial c) {
+                    commercials.add(c);
+                } else if (cell instanceof Housing h) {
+                    housings.add(h);
+                }
             }
         }
 
         int populationReceivers = industrials.size() + commercials.size();
-        if (populationReceivers > 0) {
-            int perZone = totalPopulation / populationReceivers; // integer division
-            for (Industrial i : industrials) i.receivePopulation(perZone);
-            for (Commercial c : commercials) c.receivePopulation(perZone);
+        if (populationReceivers > 0 && totalPopulation > 0) {
+            int perZone = totalPopulation / populationReceivers; // Integer division
+            for (Industrial i : industrials) {
+                i.setReceivedPopulation(perZone);
+            }
+            for (Commercial c : commercials) {
+                c.setReceivedPopulation(perZone);
+            }
         }
 
-
-        if (!commercials.isEmpty()) {
+        if (!commercials.isEmpty() && totalGoods > 0) {
             int perZone = totalGoods / commercials.size();
-            for (Commercial c : commercials) c.receiveGoods(perZone);
+            for (Commercial c : commercials) {
+                c.setReceivedGoods(perZone);
+            }
         }
 
-
-        if (!housings.isEmpty()) {
+        if (!housings.isEmpty() && totalLifestyle > 0) {
             int perZone = totalLifestyle / housings.size();
-            for (Housing h : housings) h.setReceivedLifestyle(perZone);
+            for (Housing h : housings) {
+                h.setReceivedLifestyle(perZone);
+            }
+        }
+
+        this.totalPopulation = 0;
+        this.totalGoods = 0;
+        this.totalLifestyle = 0;
+    }
+
+    public void accumulate(Cell[][] grid) {
+        if (grid == null) return;
+
+        this.totalPopulation = 0;
+        this.totalGoods = 0;
+        this.totalLifestyle = 0;
+
+        for (Cell[] row : grid) {
+            for (Cell cell : row) {
+                if (cell instanceof Housing h) {
+                    this.totalPopulation += h.getOutput();
+                } else if (cell instanceof Industrial i) {
+                    this.totalGoods += i.getOutput();
+                } else if (cell instanceof Commercial c) {
+                    this.totalLifestyle += c.getOutput();
+                }
+            }
         }
     }
 
