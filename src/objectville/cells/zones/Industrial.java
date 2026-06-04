@@ -57,13 +57,8 @@ public class Industrial extends Zone {
             }
         }
 
-        if (this.getLevel() == 0 || this.getLevel() == 1) {
-            needsPopulation = true;
-            needsElectricity = true;
-            needsWater = true;
-        }
-
-        if (this.getLevel() == 2) {
+        if (this.getLevel() == 0 || this.getLevel() == 1)
+        {
             needsPopulation = true;
             needsElectricity = true;
             needsWater = true;
@@ -72,7 +67,21 @@ public class Industrial extends Zone {
             needsSecurity = true;
         }
 
-        if (this.getLevel() == 3) {
+        if (this.getLevel() == 2)
+        {
+            needsPopulation = true;
+            needsElectricity = true;
+            needsWater = true;
+
+            // Level 2 needs
+            needsSecurity = true;
+
+            // Level 3 needs
+            needsExcessPopulation = true;
+        }
+
+        if (this.getLevel() == 3)
+        {
             needsPopulation = true;
             needsElectricity = true;
             needsWater = true;

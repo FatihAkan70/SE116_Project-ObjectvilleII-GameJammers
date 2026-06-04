@@ -59,6 +59,10 @@ public class Housing extends Zone {
             needsElectricity = true;
             needsWater = true;
             needsInternet = true;
+
+            needsSecurity = true;
+            needsHealth = true;
+            needsEducation = true;
         }
 
         if (this.getLevel() == 2)
@@ -71,6 +75,9 @@ public class Housing extends Zone {
             needsSecurity = true;
             needsHealth = true;
             needsEducation = true;
+
+            // Level 3 needs
+            needsLifestyle = true;
         }
 
         if (this.getLevel() == 3)

@@ -71,6 +71,9 @@ public class Commercial extends Zone {
             needsElectricity = true;
             needsWater = true;
             needsInternet = true;
+
+            // Level 2 needs
+            needsSecurity = true;
         }
 
         if (this.getLevel() == 2)
@@ -84,6 +87,10 @@ public class Commercial extends Zone {
 
             // Level 2 needs
             needsSecurity = true;
+
+            // Level 3 needs
+            needsExcessLifestyle = true;
+            needsExcessGoods = true;
 
         }
 

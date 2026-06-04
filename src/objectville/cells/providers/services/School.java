@@ -16,7 +16,7 @@ public class School extends ServiceProvider
         if (grid instanceof Zone && ((Zone) grid).isNeedsEducation())
         {
             ((Zone) grid).setHasEducation(true);
-            System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateX() + "," + grid.getCoordinateY() + ") received education service");
+            System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateY() + "," + grid.getCoordinateX() + ") received education service");
         }
     }
 }

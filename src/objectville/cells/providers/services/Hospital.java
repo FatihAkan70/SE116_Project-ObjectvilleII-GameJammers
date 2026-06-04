@@ -16,7 +16,7 @@ public class Hospital extends ServiceProvider
         if (grid instanceof Zone && ((Zone) grid).isNeedsHealth())
         {
             ((Zone) grid).setHasHealth(true);
-            System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateX() + "," + grid.getCoordinateY() + ") received health service");
+            System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateY() + "," + grid.getCoordinateX() + ") received health service");
         }
 
     }
