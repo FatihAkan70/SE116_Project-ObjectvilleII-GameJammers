@@ -53,7 +53,7 @@ public abstract class Zone extends Cell
     }
 
     public int getUtilityDemand() {
-        return Math.max(1, computeOutput());
+        return Math.max(1, output);
     }
 
     public abstract int computeOutput();
@@ -61,7 +61,7 @@ public abstract class Zone extends Cell
     public abstract void updateLevel();
 
     public int getLevel() { return level; }
-    public int getOutput() { return computeOutput(); }
+    public int getOutput() { return output; }
 
     public void resetTickInputs() {
         receivedElectricity = 0;
@@ -73,6 +73,18 @@ public abstract class Zone extends Cell
         receivedPopulation = 0;
         receivedGoods = 0;
         receivedLifestyle = 0;
+        needsSecurity = false;
+        needsHealth = false;
+        needsEducation = false;
+        needsElectricity = false;
+        needsWater = false;
+        needsInternet = false;
+        needsPopulation = false;
+        needsGoods = false;
+        needsLifestyle = false;
+        needsExcessPopulation = false;
+        needsExcessGoods = false;
+        needsExcessLifestyle = false;
     }
 
     // Setters for such attributes.
