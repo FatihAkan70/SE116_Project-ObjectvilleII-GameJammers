@@ -22,20 +22,6 @@ public class SimulationManager{
     }
     private void runTick(Cell[][] grid, int tick, ResourcePool resourcePool) {
 
-        // Resetting part (first step of each tick)
-        for (Cell[] row : grid) {
-            for (Cell cell : row) {
-                if (cell instanceof Zone z){
-                    z.resetTickInputs();
-                }
-                if (cell instanceof ServiceProvider sp){
-                    sp.distributeService(grid);
-                }
-                if (cell instanceof UtilityProvider up){
-                    up.distributeUtility(grid);
-                }
-            }
-        }
 
         // the pool is empty at the first tick so we skip this part at there
         // distributing the new sources based on the new output from previous(last) step.
@@ -79,7 +65,7 @@ public class SimulationManager{
         else if (newLevel < oldLevel)
             System.out.println(name + " at " + loc + " levels down from " + oldLevel + " to " + newLevel );
         else {
-            System.out.println(name + " at " + loc + " did not leveled up");
+            System.out.println(name + " at " + loc + " did not level up");
         }
     }
 }
