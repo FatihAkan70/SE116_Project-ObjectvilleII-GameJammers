@@ -92,23 +92,22 @@ public class Housing extends Zone {
     public int computeOutput() {
 
         if (this.level == 0) {
+            this.output = 0;
             return 0;
         }
 
         int m = Math.min(this.receivedElectricity, Math.min(this.receivedWater, this.receivedInternet));
 
         if (this.level == 1) {
-            return m; //
+            this.output = m;
+        }
+        else if (this.level == 2) {
+            this.output = 2 * m;
+        }
+        else if (this.level == 3) {
+            this.output = (2 * m) + this.receivedLifestyle;
         }
 
-            else if (this.level == 2) {
-            return 2 * m; //
-        }
-
-            else if (this.level == 3) {
-            return (2 * m) + this.receivedLifestyle; //
-        }
-
-        return 0;
+        return this.output;
     }
 }

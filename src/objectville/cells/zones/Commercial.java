@@ -108,24 +108,23 @@ public class Commercial extends Zone {
     public int computeOutput() {
 
         if (this.level == 0) {
+            this.output = 0;
             return 0;
         }
 
         int m = Math.min(this.receivedElectricity, Math.min(this.receivedWater, this.receivedInternet));
 
         if (this.level == 1) {
-            return m;
+            this.output = m;
         }
-
-            else if (this.level == 2) {
-            return 2 * m;
+        else if (this.level == 2) {
+            this.output = 2 * m;
         }
-
-            else if (this.level == 3) {
+        else if (this.level == 3) {
             int minResource = Math.min(this.receivedPopulation, this.receivedGoods);
-            return (2 * m) + minResource;
+            this.output = (2 * m) + minResource;
         }
 
-        return 0;
+        return this.output;
     }
 }
