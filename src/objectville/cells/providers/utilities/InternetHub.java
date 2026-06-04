@@ -20,6 +20,7 @@ public class InternetHub extends UtilityProvider
             ((Zone) grid).receiveInternet(Math.min(utility, zoneDemand));
             System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateY() + "," + grid.getCoordinateX() + ") received " + Math.min(utility, zoneDemand) + " internet");
         }
+
         if (utility <= zoneDemand)
             utility = 0;
         else

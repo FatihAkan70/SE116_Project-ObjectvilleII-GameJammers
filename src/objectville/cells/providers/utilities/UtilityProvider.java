@@ -9,11 +9,7 @@ import java.util.ArrayList;
 public abstract class UtilityProvider extends Cell
 {
     private boolean hasSpreadOnceAtCurrentLayer;
-
-    // Method "setUtility" should only be used for testing purposes
     protected int utility;
-    public int getCurrentUtility() {return utility;}
-    private void setUtility(int utility) {this.utility = utility;}
 
     public UtilityProvider(int utility ,int coordinateX, int coordinateY)
     {
@@ -21,16 +17,11 @@ public abstract class UtilityProvider extends Cell
         this.utility = utility;
     }
 
+    // Generic methods for the generation of utility in the utility provider and providing utility to an any cell
     public void generateUtility() {utility = utility + 100;}
+    public abstract void provideUtility(Cell grid);
 
-    public void provideUtility(Cell grid)
-    {
-        System.out.println("WIP");
-        utility = utility - 3;
-        System.out.println("Remaining utility: " + utility);
-    }
-
-    // Uses Breadth-First research
+    // The main method that should be called by an instance of this object, Uses Breadth-First research
     public void distributeUtility(Cell[][] gridMap)
     {
         int layerCounter = 0;
@@ -72,6 +63,7 @@ public abstract class UtilityProvider extends Cell
 
     }
 
+    // Private methods to be used by the spreadOneLayer method
     private void processNorth(Cell[][] gridMap, int layerCounter, ArrayList<Cell> connectedToUtilityProvider)
     {
         for (int x = -layerCounter; x < layerCounter + 1 ; x++)
@@ -85,39 +77,13 @@ public abstract class UtilityProvider extends Cell
             Cell currentGrid = gridMap[coordinateX + x][coordinateY - layerCounter];
 
             // Tests if the current grid has been iterated over successfully before
-            if (connectedToUtilityProvider.contains(currentGrid))
-                continue;
-
-            //Tests if the grid is connected to the utility provider
-            boolean connectedToSystem = false;
-            connectionTester:
-            for (int i = -1; i < 1 + 1 ; i++)
-            {
-                for (int z = -1; z < 1 + 1 ; z++)
-                {
-                    if (connectedToSystem)
-                        break connectionTester;
-                    else if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
-                        continue;
-                    else if (currentGrid.getCoordinateX() + i >= gridMap.length || currentGrid.getCoordinateY() + z >= gridMap[currentGrid.getCoordinateX() + i].length)
-                        continue;
-                    else if (connectedToUtilityProvider.contains(gridMap[currentGrid.getCoordinateX() + i][currentGrid.getCoordinateY() + z]))
-                        connectedToSystem = true;
-                }
-            }
-            if (!connectedToSystem)
-                continue;
-
-            // Test if grid type is eligible to receive utility
-            if (!(currentGrid instanceof Zone || currentGrid instanceof Road))
-                continue;
+            if (gridNotEligibleToReceiveUtility(gridMap, connectedToUtilityProvider, currentGrid)) continue;
 
             // Breaks if utility becomes zero
             if (handleDistribution(connectedToUtilityProvider, currentGrid)) break;
 
         }
     }
-
     private void processEast(Cell[][] gridMap, int layerCounter, ArrayList<Cell> connectedToUtilityProvider)
     {
         for (int y = -layerCounter; y < layerCounter + 1 ; y++)
@@ -131,40 +97,13 @@ public abstract class UtilityProvider extends Cell
             Cell currentGrid = gridMap[coordinateX + layerCounter][coordinateY + y];
 
             // Tests if the current grid has been iterated over successfully before
-            if (connectedToUtilityProvider.contains(currentGrid))
-                continue;
-
-            //Tests if the grid is connected to the utility provider
-            boolean connectedToSystem = false;
-            connectionTester:
-            for (int i = -1; i < 1 + 1 ; i++)
-            {
-                for (int z = -1; z < 1 + 1 ; z++)
-                {
-                    if (connectedToSystem)
-                        break connectionTester;
-                    else if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
-                        continue;
-                    else if (currentGrid.getCoordinateX() + i >= gridMap.length || currentGrid.getCoordinateY() + z >= gridMap[currentGrid.getCoordinateX() + i].length)
-                        continue;
-                    else if (connectedToUtilityProvider.contains(gridMap[currentGrid.getCoordinateX() + i][currentGrid.getCoordinateY() + z]))
-                        connectedToSystem = true;
-                }
-            }
-
-            if (!connectedToSystem)
-                continue;
-
-            // Test if grid type is eligible to receive utility
-            if (!(currentGrid instanceof Zone || currentGrid instanceof Road))
-                continue;
+            if (gridNotEligibleToReceiveUtility(gridMap, connectedToUtilityProvider, currentGrid)) continue;
 
             // Breaks if utility becomes zero
             if (handleDistribution(connectedToUtilityProvider, currentGrid)) break;
 
         }
     }
-
     private void processSouth(Cell[][] gridMap, int layerCounter, ArrayList<Cell> connectedToUtilityProvider)
     {
         for (int x = -layerCounter; x < layerCounter + 1 ; x++)
@@ -178,40 +117,13 @@ public abstract class UtilityProvider extends Cell
             Cell currentGrid = gridMap[coordinateX - x][coordinateY + layerCounter];
 
             // Tests if the current grid has been iterated over successfully before
-            if (connectedToUtilityProvider.contains(currentGrid))
-                continue;
-
-            //Tests if the grid is connected to the utility provider
-            boolean connectedToSystem = false;
-            connectionTester:
-            for (int i = -1; i < 1 + 1 ; i++)
-            {
-                for (int z = -1; z < 1 + 1 ; z++)
-                {
-                    if (connectedToSystem)
-                        break connectionTester;
-                    else if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
-                        continue;
-                    else if (currentGrid.getCoordinateX() + i >= gridMap.length || currentGrid.getCoordinateY() + z >= gridMap[currentGrid.getCoordinateX() + i].length)
-                        continue;
-                    else if (connectedToUtilityProvider.contains(gridMap[currentGrid.getCoordinateX() + i][currentGrid.getCoordinateY() + z]))
-                        connectedToSystem = true;
-                }
-            }
-
-            if (!connectedToSystem)
-                continue;
-
-            // Test if grid type is eligible to receive utility
-            if (!(currentGrid instanceof Zone || currentGrid instanceof Road))
-                continue;
+            if (gridNotEligibleToReceiveUtility(gridMap, connectedToUtilityProvider, currentGrid)) continue;
 
             // Breaks if utility becomes zero
             if (handleDistribution(connectedToUtilityProvider, currentGrid)) break;
 
         }
     }
-
     private void processWest(Cell[][] gridMap, int layerCounter, ArrayList<Cell> connectedToUtilityProvider)
     {
         for (int y = -layerCounter; y < layerCounter + 1 ; y++)
@@ -224,33 +136,8 @@ public abstract class UtilityProvider extends Cell
 
             Cell currentGrid = gridMap[coordinateX - layerCounter][coordinateY - y];
 
-            // Tests if the current grid has been iterated over successfully before
-            if (connectedToUtilityProvider.contains(currentGrid))
-               continue;
-
-            //Tests if the grid is connected to the utility provider
-            boolean connectedToSystem = false;
-            connectionTester:
-            for (int i = -1; i < 1 + 1 ; i++)
-            {
-                for (int z = -1; z < 1 + 1 ; z++)
-                {
-                    if (connectedToSystem)
-                        break connectionTester;
-                    else if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
-                        continue;
-                    else if (currentGrid.getCoordinateX() + i >= gridMap.length || currentGrid.getCoordinateY() + z >= gridMap[currentGrid.getCoordinateX() + i].length)
-                        continue;
-                    else if (connectedToUtilityProvider.contains(gridMap[currentGrid.getCoordinateX() + i][currentGrid.getCoordinateY() + z]))
-                        connectedToSystem = true;
-                }
-            }
-            if (!connectedToSystem)
-                continue;
-
-            // Test if grid type is eligible to receive utility
-            if (!(currentGrid instanceof Zone || currentGrid instanceof Road))
-                continue;
+            // Checks for any flags that make the grid ineligible to receive utility
+            if (gridNotEligibleToReceiveUtility(gridMap, connectedToUtilityProvider, currentGrid)) continue;
 
             // Breaks if utility becomes zero
             if (handleDistribution(connectedToUtilityProvider, currentGrid)) break;
@@ -258,11 +145,47 @@ public abstract class UtilityProvider extends Cell
         }
     }
 
+    // Private methods to be used by the 4 processor methods
+    private static boolean gridNotEligibleToReceiveUtility(Cell[][] gridMap, ArrayList<Cell> connectedToUtilityProvider, Cell currentGrid)
+    {
+        // Tests if the current grid has been iterated over successfully before
+        if (connectedToUtilityProvider.contains(currentGrid))
+            return true;
 
-    // Private methods to be used by in class Methods
+        //Tests if the grid is connected to the utility provider
+        if (gridNotConnectedToSystem(gridMap, connectedToUtilityProvider, currentGrid)) return true;
+
+        // Test if grid type is eligible to receive utility
+        if (!(currentGrid instanceof Zone || currentGrid instanceof Road))
+            return true;
+        return false;
+    }
+    private static boolean gridNotConnectedToSystem(Cell[][] gridMap, ArrayList<Cell> connectedToUtilityProvider, Cell currentGrid)
+    {
+        boolean connectedToSystem = false;
+        connectionTester:
+        for (int i = -1; i < 1 + 1 ; i++)
+        {
+            for (int z = -1; z < 1 + 1 ; z++)
+            {
+                if (currentGrid.getCoordinateX() + i < 0 || currentGrid.getCoordinateY() + z < 0)
+                    continue;
+                else if (currentGrid.getCoordinateX() + i >= gridMap.length || currentGrid.getCoordinateY() + z >= gridMap[currentGrid.getCoordinateX() + i].length)
+                    continue;
+                else if (connectedToUtilityProvider.contains(gridMap[currentGrid.getCoordinateX() + i][currentGrid.getCoordinateY() + z]))
+                {
+                    connectedToSystem = true;
+                    break connectionTester;
+                }
+            }
+        }
+        if (!connectedToSystem)
+            return true;
+        return false;
+    }
     private boolean handleDistribution(ArrayList<Cell> connectedToUtilityProvider, Cell currentGrid)
     {
-        if (utility <= 0)
+        if (isUtilityRemaining())
             return true;
 
         if (currentGrid instanceof Zone)
@@ -270,10 +193,11 @@ public abstract class UtilityProvider extends Cell
         connectedToUtilityProvider.add(currentGrid);
         hasSpreadOnceAtCurrentLayer = true;
 
-        if (utility <= 0)
+        if (isUtilityRemaining())
             return true;
-
-        return false;
+        else
+            return false;
     }
+    private boolean isUtilityRemaining() {return utility <= 0;}
 
 }

@@ -20,6 +20,7 @@ public class WaterPumpingStation extends UtilityProvider
             ((Zone) grid).receiveWater(Math.min(utility, zoneDemand));
             System.out.println(grid.getClass().getSimpleName() + " at (" + grid.getCoordinateY() + "," + grid.getCoordinateX() + ") received " + Math.min(utility, zoneDemand) + " water");
         }
+
         if (utility <= zoneDemand)
             utility = 0;
         else
