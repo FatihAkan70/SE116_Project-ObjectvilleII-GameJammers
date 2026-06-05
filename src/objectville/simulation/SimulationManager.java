@@ -43,7 +43,7 @@ public class SimulationManager {
             }
         }
 
-        // Previous tick’s production is distributed
+        // Production is distributed
         if (tick > 1) {
             resourcePool.distribute(grid);
         }
@@ -86,7 +86,7 @@ public class SimulationManager {
             }
         }
 
-        String loc = "(" + z.getCoordinateY() + "," + z.getCoordinateX() + ")";
+        String loc = "(" + z.getCoordinateY() + "," + z.getCoordinateX() + ")"; //Switched these variables' places so that it matches the expected output given.
 
         System.out.println(name + " at " + loc + " generated " + z.getOutput() + " " + resource);
 

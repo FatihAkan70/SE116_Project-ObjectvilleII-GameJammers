@@ -42,7 +42,7 @@ public class ResourcePool {
 
         int populationReceivers = industrials.size() + commercials.size();
         if (populationReceivers > 0 && totalPopulation > 0) {
-            int perZone = totalPopulation / populationReceivers; // Integer division
+            int perZone = totalPopulation / populationReceivers;
             for (Industrial i : industrials) {
                 i.setReceivedPopulation(perZone);
             }
