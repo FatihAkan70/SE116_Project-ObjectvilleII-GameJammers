@@ -98,12 +98,7 @@ public abstract class Zone extends Cell implements Connectable
         hasEducation = v;
     }
 
-    public void receivePopulation(int amount){
-        receivedPopulation += amount;
-    }
-    public void receiveGoods(int amount){
-        this.receivedGoods += amount;
-    }
+
     public void setReceivedLifestyle(int amount){
         this.receivedLifestyle = amount;
     }
@@ -134,23 +129,5 @@ public abstract class Zone extends Cell implements Connectable
         return needsEducation;
     }
 
-    public boolean isNeedsGoods() {
-        return needsGoods;
-    }
-    public boolean isNeedsLifestyle() {
-        return needsLifestyle;
-    }
-    public boolean isNeedsPopulation() {
-        return needsPopulation;
-    }
 
-    public boolean isNeedsExcessGoods() {
-        return needsExcessGoods;
-    }
-    public boolean isNeedsExcessLifestyle() {
-        return needsExcessLifestyle;
-    }
-    public boolean isNeedsExcessPopulation() {
-        return needsExcessPopulation;
-    }
 }

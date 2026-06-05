@@ -17,9 +17,8 @@ public class SimulationManager {
             return;
         }
 
-        // Optimized for legacy execution review
         for (int tick = 1; tick <= tickCount; tick++) {
-            System.out.println("Tick " + tick); // Hocanın formatı: "Tick 1", "Tick 10" (çizgi vs. yok)
+            System.out.println("Tick " + tick);
             runTick(grid, tick, resourcePool);
         }
     }
@@ -69,10 +68,23 @@ public class SimulationManager {
     private void logZone(Zone z, int oldLevel) {
         String name;
         String resource;
-        if (z instanceof Housing)         { name = "House";       resource = "population"; }
-        else if (z instanceof Industrial) { name = "Industrial";  resource = "goods"; }
-        else if (z instanceof Commercial) { name = "Commercial";  resource = "lifestyle"; }
-        else return;
+        switch (z) {
+            case Housing housing -> {
+                name = "House";
+                resource = "population";
+            }
+            case Industrial industrial -> {
+                name = "Industrial";
+                resource = "goods";
+            }
+            case Commercial commercial -> {
+                name = "Commercial";
+                resource = "lifestyle";
+            }
+            case null, default -> {
+                return;
+            }
+        }
 
         String loc = "(" + z.getCoordinateY() + "," + z.getCoordinateX() + ")";
 

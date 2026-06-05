@@ -3,7 +3,6 @@ package objectville.simulation;
 import objectville.cells.zones.Commercial;
 import objectville.cells.zones.Housing;
 import objectville.cells.zones.Industrial;
-import objectville.cells.zones.Zone;
 import objectville.grid.Cell;
 
 import java.util.ArrayList;
@@ -82,16 +81,17 @@ public class ResourcePool {
             for (Cell cell : row) {
                 if (cell instanceof Housing h) {
                     this.totalPopulation += h.getOutput();
+                    h.resetTickInputs();
                 } else if (cell instanceof Industrial i) {
                     this.totalGoods += i.getOutput();
+                    i.resetTickInputs();
                 } else if (cell instanceof Commercial c) {
                     this.totalLifestyle += c.getOutput();
+                    c.resetTickInputs();
                 }
             }
         }
     }
 
-    public int getTotalPopulation() { return totalPopulation; }
-    public int getTotalGoods()      { return totalGoods; }
-    public int getTotalLifestyle()  { return totalLifestyle; }
+
 }
