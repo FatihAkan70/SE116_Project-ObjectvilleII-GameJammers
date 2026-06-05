@@ -11,7 +11,7 @@ public class Main {
         //filename:(where the map data is stored) and the
         //tick count:(how long the simulation runs) are provided or not
 
-        /*
+
         if (args.length < 2) {
             //Fail Fast mechanism
 
@@ -36,10 +36,7 @@ public class Main {
         catch (Exception e) {
             System.out.println( " Error: Invalid tick count! " );
             return; }
-        */
 
-        String fileName = "map00.txt";
-        int tickCount = 10;
 
         SimulationManager testManager = new SimulationManager();
         MapLoader testLoader = new MapLoader();
@@ -50,6 +47,9 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
+        catch (Exception e) {
+            System.out.println("Unexpected error: " + e.getMessage());
+            //not the best way to catch any errors but just in case (backup)
+        }
     }
 }

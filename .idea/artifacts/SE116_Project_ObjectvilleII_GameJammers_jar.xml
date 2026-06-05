@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact name="SE116_Project-ObjectvilleII-GameJammers:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SE116_Project_ObjectvilleII_GameJammers_jar</output-path>
+    <root id="root">
+      <element id="archive" name="SE116_Project-ObjectvilleII-GameJammers.jar">
+        <element id="module-output" name="SE116_Project-ObjectvilleII-GameJammers" />
+      </element>
+    </root>
+  </artifact>
+</component>
