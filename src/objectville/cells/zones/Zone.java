@@ -1,13 +1,14 @@
 package objectville.cells.zones;
 import objectville.grid.Cell;
+import objectville.grid.Connectable;
 
-public abstract class Zone extends Cell
+public abstract class Zone extends Cell implements Connectable
 {
     protected int level;
     protected int output;   // per tick
 
     @Override
-    public boolean isConnectable(){
+    public boolean isConnectable() {
         return true;
     }
 

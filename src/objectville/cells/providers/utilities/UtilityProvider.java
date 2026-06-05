@@ -156,7 +156,7 @@ public abstract class UtilityProvider extends Cell
         if (gridNotConnectedToSystem(gridMap, connectedToUtilityProvider, currentGrid)) return true;
 
         // Test if grid type is eligible to receive utility
-        if (!(currentGrid instanceof Zone || currentGrid instanceof Road))
+        if (!(currentGrid.isConnectable()))
             return true;
         return false;
     }

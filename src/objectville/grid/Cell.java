@@ -1,6 +1,6 @@
 package objectville.grid;
 
-public abstract class Cell
+public abstract class Cell implements Connectable
 {
 
     protected int coordinateX;
@@ -14,8 +14,9 @@ public abstract class Cell
         this.coordinateY = coordinateY;
     }
 
-    public boolean isConnectable() {
+    @Override
+    public boolean isConnectable()
+    {
         return false;
     }
-
 }
